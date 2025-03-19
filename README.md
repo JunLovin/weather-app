@@ -43,7 +43,7 @@
    npm run dev
    ```
 
-5. Abre tu navegador y visita ``http://localhost:5173`
+5. Abre tu navegador y visita `http://localhost:5173`
 
 ## 🌐 Demo en Vivo
 
