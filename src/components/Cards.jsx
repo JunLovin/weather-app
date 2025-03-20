@@ -18,17 +18,17 @@ function Cards() {
 
     return (
         <>
-            <div className="cards w-full mt-8">
-                <div className="grid grid-cols-5 grid-rows-5 gap-4">
+            <div className="cards w-full mt-8 max-w-full px-4 max-[1000px]:text-center">
+                <div className="grid xl:grid-cols-5 grid-rows-auto grid-cols-1 xl:grid-rows-5 gap-4 max-w-full overflow-hidden">
                     <div className="card row-span-5 flex flex-col justify-center items-center p-4">
                     {data && (
                             <>
-                                <h2 className="text-5xl text-center font-bold mb-2">{data.address}</h2>
-                                <div className="high-low flex justify-between w-full text-xl my-2">
+                                <h2 className="text-5xl text-center font-bold mb-2 max-[1500px]:text-3xl">{data.address}</h2>
+                                <div className="high-low flex justify-between w-full text-xl my-2 text-center max-[1280px]:justify-around">
                                     <div>Min: {celcius ? handleFarenheit(data.days[0].tempmin) : data.days[0].tempmin}°</div>
                                     <div>Max: {celcius ? handleFarenheit(data.days[0].tempmax) : data.days[0].tempmax}°</div>
                                 </div>
-                                <div className="date-time text-lg mt-4">
+                                <div className="date-time text-lg mt-4 text-center">
                                     {new Date().toLocaleDateString('en-US', { 
                                         weekday: 'long', 
                                         year: 'numeric', 
@@ -36,7 +36,7 @@ function Cards() {
                                         day: 'numeric' 
                                     })}
                                 </div>
-                                <div className="sunrise-sunset flex justify-between w-full mt-4">
+                                <div className="sunrise-sunset flex justify-between w-full mt-4 max-[1280px]:justify-around">
                                     <div className="flex flex-col items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                             <path d="M12 2C11.5 2 11 2.19 10.59 2.59L2.59 10.59C1.8 11.37 1.8 12.63 2.59 13.41C3.37 14.2 4.63 14.2 5.41 13.41L12 6.83L18.59 13.41C19.37 14.2 20.63 14.2 21.41 13.41C22.2 12.63 22.2 11.37 21.41 10.59L13.41 2.59C13 2.19 12.5 2 12 2M12 8L6.12 13.88L7.54 15.29L11 11.83V22H13V11.83L16.46 15.29L17.88 13.88L12 8Z" />
@@ -53,7 +53,40 @@ function Cards() {
                             </>
                         )}
                     </div>
-                    <div className="card-container col-span-3 row-span-5 grid grid-rows-2 grid-cols-1 gap-4">
+                    <div className="card min-[1280px]:hidden xl:row-span-5 xl:col-start-5 flex justify-center flex-col text-center items-center">
+                        <div className="condition-title">
+                            <h5 className="text-4xl max-[1500px]:text-2xl">Conditions</h5>
+                        </div>
+                        <div className="wind">
+                            <div className="title text-white flex gap-2 items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 8h8.5a2.5 2.5 0 1 0 -2.34 -3.24" /><path d="M3 12h15.5a2.5 2.5 0 1 1 -2.34 3.24" /><path d="M4 16h5.5a2.5 2.5 0 1 1 -2.34 3.24" /></svg>
+                                <h5 className="text-xl">Wind Speed</h5>
+                            </div>
+                            <span className="text-xl">{data && data.currentConditions.windspeed}</span>
+                        </div>
+                        <div className="humidity">
+                            <div className="title flex gap-2 text-white items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 12.003c.541 0 1.045 .273 1.342 .727l2.122 3.273a3.999 3.999 0 0 1 -6.035 5.063c-1.487 -1.248 -1.864 -3.382 -.867 -5.11l2.098 -3.226a1.6 1.6 0 0 1 1.34 -.727" /><path d="M18 12.003c.541 0 1.045 .273 1.342 .727l2.122 3.273a3.999 3.999 0 0 1 -6.035 5.063c-1.487 -1.248 -1.864 -3.382 -.867 -5.11l2.098 -3.227a1.6 1.6 0 0 1 1.34 -.726" /><path d="M12 2.003c.541 0 1.045 .273 1.342 .727l2.122 3.273a3.999 3.999 0 0 1 -6.035 5.063c-1.487 -1.248 -1.864 -3.382 -.867 -5.11l2.098 -3.226a1.6 1.6 0 0 1 1.34 -.727" /></svg>
+                                <h5 className="text-xl">Humidity</h5>
+                            </div>
+                            <span className="text-xl">{data && data.currentConditions.humidity}</span>
+                        </div>
+                        <div className="feels-like">
+                            <div className="title flex gap-2 text-white items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.8 10.946a1 1 0 0 0 -1.414 .014a2.5 2.5 0 0 1 -3.572 0a1 1 0 0 0 -1.428 1.4a4.5 4.5 0 0 0 6.428 0a1 1 0 0 0 -.014 -1.414zm-6.19 -5.286l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993zm6 0l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993z" /></svg>
+                                <h5 className="text-xl">Feels Like</h5>
+                            </div>
+                            <span className="text-xl">{data && data.currentConditions.feelslike}</span>
+                        </div>
+                        <div className="cloud-cover">
+                            <div className="title flex gap-2 text-white items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18.286 22C20.337 22 22 20.42 22 18.47c0-1.544-1.045-2.857-2.5-3.336C19.295 13.371 17.72 12 15.81 12c-2.052 0-3.715 1.58-3.715 3.53c0 .43.082.844.23 1.226a3 3 0 0 0-.54-.05C10.248 16.706 9 17.89 9 19.353S10.247 22 11.786 22z" /><path fill="currentColor" d="M21.551 14.55a5 5 0 0 0-.751-.486c-.66-2.101-2.686-3.564-4.99-3.564c-2.754 0-5.124 2.1-5.212 4.87c-1.321.37-2.41 1.342-2.867 2.63H6.286C3.919 18 2 16.104 2 13.765s1.919-4.236 4.286-4.236q.427.001.83.08a5.6 5.6 0 0 1-.354-1.962C6.762 4.528 9.32 2 12.476 2c2.94 0 5.361 2.194 5.68 5.015C20.392 7.78 22 9.881 22 12.353c0 .78-.16 1.522-.449 2.197" /></svg>
+                                <h5 className="text-xl">Clouds</h5>
+                            </div>
+                            <span className="text-xl">{data && data.currentConditions.cloudcover}</span>
+                        </div>
+                    </div>
+                    <div className="card-container xl:col-span-3  xl:row-span-5 grid grid-rows-2 grid-cols-1 gap-4">
                         <div className="card weather-days flex flex-col h-full w-full overflow-x-scroll">
                             <div className="weather-days flex flex-row gap-12 text-center h-full items-center">
                                 {data && data.days.map((el, i) => {
@@ -84,9 +117,9 @@ function Cards() {
                             <HourlyCharts />
                         </div>
                     </div>
-                    <div className="card row-span-5 col-start-5 flex justify-center flex-col">
+                    <div className="card xl:row-span-5 xl:col-start-5 flex justify-center flex-col max-[1280px]:hidden">
                         <div className="condition-title">
-                            <h5 className="text-2xl">Condition</h5>
+                            <h5 className="text-4xl max-[1500px]:text-2xl">Conditions</h5>
                         </div>
                         <div className="wind">
                             <div className="title text-white flex gap-2 items-center">
